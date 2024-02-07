@@ -1,0 +1,25 @@
+body{
+    text-align: center;
+}
+
+.cell{
+    background-color: salmon;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+    
+}
+.cell:hover{
+    background-color: #a35050;
+}
+.board-container {
+    margin: auto;
+  }
+  .cell img {
+    width: 40px;
+    height: auto;
+}
+
+td{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
