@@ -1,5 +1,25 @@
 body{
     text-align: center;
+    background-color: #5c7c90;
+}
+h1{
+    font-family: Copperplate, Papyrus, fantasy;
+}
+.level{
+    font-family:Copperplate, Papyrus, fantasy ;
+    color: rgb(94, 21, 21);
+}
+.level button{
+    background-color: #efc2c2;
+    border: solid 2px rgb(176, 56, 56);
+    border-radius: 10px;
+    padding: 4px;
+    width: 80px;
+    height: 30px;
+}
+.level button:hover{
+    background-color: #a35050;
+    cursor: pointer;
 }
 
 .cell{
@@ -11,6 +31,8 @@ body{
 }
 .cell:hover{
     background-color: #a35050;
+    cursor: pointer;
+
 }
 .board-container {
     margin: auto;
@@ -22,4 +44,20 @@ body{
 
 td{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+footer{
+    margin-top: 30px;
+    font-family: Copperplate, Papyrus, fantasy;
+}
+.smiley{
+    background-color: #efc2c2;
+    border: solid 2px rgb(176, 56, 56);
+    border-radius: 10px;
+    padding: 6px;
+    width: 90px;
+    height: 40px;
+}
+.smiley:hover{
+    cursor: pointer;
+    background-color: #a35050;
 }

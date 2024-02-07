@@ -1,10 +1,18 @@
 'use strict'
-
+const SMILEY = '😃'
+const WIN_SMILEY = '🤑'
+const WORRY = '😰'
+const SOON_DEAD = '🤢'
+const LOSE_SMILY = '💀'
 const MINE = '💣'
 const MARK = '🚩'
 const CELL = ''
 const elBoard = document.querySelector('.board')
-
+var gClickes = 0
+var gLives = 3
+const elLive = document.querySelector('.live')
+elLive.innerText = `lives : ${gLives}`
+const elSmileyButton = document.querySelector('.smiley')
 
 
 
@@ -44,7 +52,7 @@ function buildBoard() {
             }
         }
     }
-    board[0][2].isMine = board[2][1].isMine = true
+    // board[0][2].isMine = board[2][1].isMine = true
     //RANDOMIZING
     // board[getRandomIntInclusive(0, size - 1)][getRandomIntInclusive(0, size - 1)].isMine =
     //     board[getRandomIntInclusive(0, size - 1)][getRandomIntInclusive(0, size - 1)].isMine = true
@@ -58,20 +66,18 @@ function rednerBoard(board) {
         for (var j = 0; j < board[0].length; j++) {
             const currCell = board[i][j]
             strHTML += `\t<td class="cell ${i} ${j}" onclick="onCellClicked(this,${i},${j})" >\n`
-            if (currCell.isMine === true) {
-                strHTML += MINE
-                console.log('hi');
-            } else if (currCell.isMarked === true) {
+            // if (currCell.isMine === true) {
+            //     strHTML += MINE
+            //     // console.log('hi');
+            // } else
+             if (currCell.isMarked === true) {
                 strHTML += MARK
-            } else if (currCell.minesAroundCount) {
-                // strHTML += currCell.minesAroundCount
             }
             strHTML += '\t</td>\n'
 
         }
         strHTML += '</tr>\n'
     }
-    // console.log('trying to rnder');
     elBoard.innerHTML = strHTML
 }
 
@@ -98,12 +104,36 @@ function setMinesNegsCount(board) {
 
         }
     }
-    rednerBoard(board)
 }
 
 function onCellClicked(elCell, i, j) {
-    elCell.innerHTML = gBoard[i][j].minesAroundCount
-    // console.log(gBoard[i][j].minesAroundCount);
+
+    gClickes++
+    var currCell = gBoard[i][j]
+    console.log(`this is the ${gClickes} click`);
+    if (gClickes === 1 ) {
+  
+        gBoard[0][2].isMine = gBoard[2][1].isMine = true
+        //MODEL
+        rednerBoard(gBoard)
+        setMinesNegsCount(gBoard)
+    }
+    //DOM
+    elCell.innerHTML = currCell.minesAroundCount
+
+    //ADD LIFE
+    if (currCell.isMine) {
+        elCell.innerHTML = ''
+        --gLives
+        console.log('you clicked a mine');
+        elLive.innerText = `you have ${gLives} lives!!!!`
+        if (gLives === 2) elSmileyButton.innerHTML = WORRY
+        else if (gLives === 1) elSmileyButton.innerHTML = SOON_DEAD
+        else if (gLives === 0) elSmileyButton.innerHTML = LOSE_SMILY
+    }
+
+
+
 
 
 }
@@ -113,11 +143,20 @@ function onCellMarked(elCell) {
 }
 
 function checkGameOver() {
+if(gLives===0){
+
 
 }
+}
+
 
 function expandShown(board, elCell, i, j) {
 
 }
 
-
+function restart() {
+    gClickes = 0
+    gLives = 3
+    elLive.innerText = `lives : ${gLives}`
+    onInit()
+}
