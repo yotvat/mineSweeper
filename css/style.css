@@ -16,6 +16,8 @@ h1{
     padding: 4px;
     width: 80px;
     height: 30px;
+    font-family:Copperplate, Papyrus, fantasy ;
+    font-size: large;
 }
 .level button:hover{
     background-color: #a35050;
@@ -61,4 +63,8 @@ footer{
     cursor: pointer;
     background-color: #a35050;
 }
+h3{
+    font-family: Copperplate, Papyrus, fantasy;
+}
+
   
