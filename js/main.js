@@ -177,6 +177,7 @@ function checkGameOver() {
     if (gMarkedMines === gLevel.MINES) {
         elLive.innerHTML = 'YOU WON!! AMAZING!'
         clearInterval(gTimerInterval)
+        gGame.isOn = false
         setTimeout(restart, 3500)
         //lose
     } else if (gLives === 0) {
@@ -188,29 +189,31 @@ function checkGameOver() {
                 renderCell(i, j)
             }
         }
+        gGame.isOn = false
         clearInterval(gTimerInterval)
         setTimeout(restart, 2500)
     }
 
 }
 
-function expandShown(board, rowIdx, colIdx) {
-    var i = rowIdx
-    var j = colIdx
-    for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
-        if (i < 0 || i >= board.length) continue
-        for (var j = colIdx - 1; j <= colIdx + 1; j++) {
-            if (i === rowIdx && j === colIdx) continue
-            if (j < 0 || j >= board[0].length) continue
-            var neighbor = board[i][j]
-            if (!neighbor.isShown) {
-                neighbor.isShown = true
-                renderCell(i, j)
-                // gGame.shownCount++
-            } else continue
-        }
-    }
-}
+//FULL EXPAND ON bonus.js
+// function expandShown(board, rowIdx, colIdx) {
+//     var i = rowIdx
+//     var j = colIdx
+//     for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
+//         if (i < 0 || i >= board.length) continue
+//         for (var j = colIdx - 1; j <= colIdx + 1; j++) {
+//             if (i === rowIdx && j === colIdx) continue
+//             if (j < 0 || j >= board[0].length) continue
+//             var neighbor = board[i][j]
+//             if (!neighbor.isShown) {
+//                 neighbor.isShown = true
+//                 renderCell(i, j)
+//                 // gGame.shownCount++
+//             } else continue
+//         }
+//     }
+// }
 
 function restart() {
     clearInterval(gTimerInterval)
