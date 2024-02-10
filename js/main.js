@@ -16,6 +16,9 @@ const elSmileyButton = document.querySelector('.smiley')
 const currScore = document.querySelector('h4 span')
 elLive.innerText = `lives : ${gLives}`
 elLive.style.fontFamily = 'Copperplate, Papyrus, fantasy'
+const WIN_SOUND = new Audio('sound/win.wav')
+const LOSE_SOUND = new Audio('sound/lose.wav')
+const TIC_TOCK_SOUND = new Audio('sound/gameStart.wav')
 
 //MODEL
 var gBoard
@@ -126,6 +129,7 @@ function onCellClicked(elCell, i, j) {
     var currCell = gBoard[i][j]
     if (currCell.isShown === false) currCell.isShown = true
     if (gClickes === 1) {
+        TIC_TOCK_SOUND.play()
         startTimer()
         var minesPlaced = 0
         while (minesPlaced != gLevel.MINES) {
@@ -188,6 +192,8 @@ function checkGameOver() {
         elLive.innerHTML = 'YOU WON!! AMAZING! press the smiley to restart'
         clearInterval(gTimerInterval)
         gGame.isOn = false
+        TIC_TOCK_SOUND.pause()
+        WIN_SOUND.play()
     //lose
     } else if (gLives === 0) {
         console.log('gameover');
@@ -198,6 +204,8 @@ function checkGameOver() {
                 renderCell(i, j)
             }
         }
+        TIC_TOCK_SOUND.pause()
+        LOSE_SOUND.play()
         gGame.isOn = false
         clearInterval(gTimerInterval)
     }

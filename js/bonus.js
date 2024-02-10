@@ -4,6 +4,7 @@ var gIsHint
 var gSafeClicksCount = 3
 var elSafeClick = document.querySelector('.safe-click')
 
+
 function handleDarkMode(elBtn) {
     elBody.classList.toggle('dark-mode')
     if (elBtn.innerHTML === 'LIGHT MODE') elBtn.innerHTML = 'DARK MODE'
