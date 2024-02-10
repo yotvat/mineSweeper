@@ -42,8 +42,8 @@ function safeClick(elBtn) {
         elCell.style.color = 'green'
         elCell.innerHTML = currCell.minesAroundCount
         gSafeClicksCount++
-    } else {
         elBtn.innerHTML = '⛔️'
+    } else {
         return
     }
 }
