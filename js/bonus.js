@@ -1,4 +1,13 @@
 'use strict'
+const elBody = document.querySelector('body')
+var gIsHint
+
+function handleDarkMode(elBtn){
+    elBody.classList.toggle('dark-mode')
+    if(elBtn.innerHTML === 'LIGHT MODE') elBtn.innerHTML = 'DARK MODE'
+   else  elBtn.innerHTML = 'LIGHT MODE'
+    
+}
 
 function expandShown(board, rowIdx, colIdx) {
     var i = rowIdx
@@ -11,21 +20,13 @@ function expandShown(board, rowIdx, colIdx) {
             var neighbor = board[i][j]
             if (!neighbor.isShown) {
                 neighbor.isShown = true
+                gGame.shownCount++
                 renderCell(i, j)
                 if (!neighbor.minesAroundCount) {
                     expandShown(board, i, j)
                 }
-                // gGame.shownCount++
             } else continue
         }
     }
 }
 
-// function hint(elHint) {
-//     if (elHint.innerHTML === '🌕') elHint.innerHTML = '🌑'
-//     else elHint.innerHTML = '🌕'
-
-
-
-    
-// }

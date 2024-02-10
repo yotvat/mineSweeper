@@ -13,6 +13,7 @@ var gTimerInterval
 const elBoard = document.querySelector('.board')
 const elLive = document.querySelector('.live')
 const elSmileyButton = document.querySelector('.smiley')
+const currScore = document.querySelector('h4 span')
 elLive.innerText = `lives : ${gLives}`
 elLive.style.fontFamily = 'Copperplate, Papyrus, fantasy'
 
@@ -98,10 +99,10 @@ function setMinesNegsCount(board) {
 
 function renderCell(i, j) {
     //update DOM to current cell state
+    var elCell = document.querySelector(`td.cell.cell-${i}-${j}`)
     var currCell = gBoard[i][j]
     if (!currCell.isShown) return
 
-    var elCell = document.querySelector(`td.cell.cell-${i}-${j}`)
     if (currCell.isMine) {
         elCell.innerHTML = MINE
         return
@@ -120,30 +121,29 @@ function renderCell(i, j) {
 function onCellClicked(elCell, i, j) {
     //only after first click place mines
     gClickes++
+    gGame.shownCount++
     var currCell = gBoard[i][j]
     if (currCell.isShown === false) currCell.isShown = true
     if (gClickes === 1) {
         startTimer()
-        for (var idx = 0; idx < gLevel.MINES; idx++) {
+        var minesPlaced = 0
+        while (minesPlaced != gLevel.MINES) {
             var randIdxI = getRandomInt(0, gLevel.SIZE)
             var randIdxJ = getRandomInt(0, gLevel.SIZE)
-            if (randIdxI === i && randIdxJ === j) {
-                gBoard[randIdxI][randIdxJ].isMine = false
-            } else {
-                gBoard[randIdxI][randIdxJ].isMine = true
+            var randCell = gBoard[randIdxI][randIdxJ]
+            if (!randCell.isMine && (randIdxI !== i || randIdxJ !== j)) {
+                randCell.isMine = true
+                minesPlaced++
             }
         }
         //MODEL   
         setMinesNegsCount(gBoard)
     }
-
     //DOM
-    // renderCell
     elCell.innerHTML = currCell.minesAroundCount
 
     if (!currCell.isMine && currCell.minesAroundCount) {
     }
-
     if (currCell.minesAroundCount === 0 && !currCell.isMine) {
         expandShown(gBoard, i, j)
     }
@@ -152,6 +152,7 @@ function onCellClicked(elCell, i, j) {
     if (currCell.isMine) {
         elCell.innerHTML = MINE
         gLives--
+        gGame.isShown--
         elLive.innerText = `you have ${gLives} lives!!!!`
         if (gLives === 2) elSmileyButton.innerHTML = WORRY
         else if (gLives === 1) elSmileyButton.innerHTML = SOON_DEAD
@@ -163,22 +164,41 @@ function onCellClicked(elCell, i, j) {
 function onCellMarked(elCell, ev, i, j) {
     ev.preventDefault()
     var currCell = gBoard[i][j]
-    //model
-    currCell.isMarked = true
-    if (currCell.isMine) gMarkedMines++
-    checkGameOver()
-    //dom
-    elCell.innerHTML = MARK
+    if(currCell.isShown) return
+    if (currCell.isMarked) {
+        currCell.isShown = false
+        currCell.isMarked = false
+        elCell.innerHTML = CELL
+    }else{
+
+        //model
+        currCell.isMarked = true
+        if (currCell.isMine) gMarkedMines++
+        checkGameOver()
+        //dom
+        elCell.innerHTML = MARK
+    }
 
 }
 
 function checkGameOver() {
     //win
-    if (gMarkedMines === gLevel.MINES) {
-        elLive.innerHTML = 'YOU WON!! AMAZING!'
+    if (gMarkedMines === gLevel.MINES || gGame.shownCount === ((gLevel.SIZE * gLevel.SIZE) - gLevel.MINES)) {
+        elLive.innerHTML = 'YOU WON!! AMAZING! press the smiley to restart'
         clearInterval(gTimerInterval)
+        //SAVE THE SCORE
+        // if (localStorage) {
+        //     localStorage.setItem('currentScore', score);
+        //     var currHighScore = localStorage.getItem('currentScore')
+        //     console.log(currHighScore);
+
+        //     // currScore.innerHTML = currHighScore.innerText
+        //     // console.log('setting score');
+
+        // }
+
         gGame.isOn = false
-        setTimeout(restart, 3500)
+        // setTimeout(restart, 3500)
         //lose
     } else if (gLives === 0) {
         console.log('gameover');
@@ -191,7 +211,7 @@ function checkGameOver() {
         }
         gGame.isOn = false
         clearInterval(gTimerInterval)
-        setTimeout(restart, 2500)
+        // setTimeout(restart, 2500)
     }
 
 }
@@ -231,13 +251,10 @@ function onSizeClick(size = 4) {
     gLevel.SIZE = size
     if (gLevel.SIZE === 8) {
         gLevel.MINES = 14
-        // gCellsNeeded = (gLevel.SIZE*gLevel.SIZE)-gLevel.MINES
     } else if (gLevel.SIZE === 12) {
         gLevel.MINES = 32
-        // gCellsNeeded = (gLevel.SIZE*gLevel.SIZE)-gLevel.MINES
     } else if (gLevel.SIZE === 4) {
         gLevel.MINES = 2
-        // gCellsNeeded = (gLevel.SIZE*gLevel.SIZE)-gLevel.MINES
     }
     restart()
 }

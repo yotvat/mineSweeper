@@ -1,81 +1,117 @@
-body{
+body {
     text-align: center;
-    background-color: #5c7c90;
+    background-color: #95bad1;
+
 }
-h1{
+
+h1 {
     font-family: Copperplate, Papyrus, fantasy;
 }
-.level{
-    font-family:Copperplate, Papyrus, fantasy ;
+
+.level {
+    font-family: Copperplate, Papyrus, fantasy;
     color: rgb(94, 21, 21);
 }
-.level button{
+
+.level button {
     background-color: #efc2c2;
     border: solid 2px rgb(176, 56, 56);
     border-radius: 10px;
     padding: 4px;
     width: 80px;
     height: 30px;
-    font-family:Copperplate, Papyrus, fantasy ;
+    font-family: Copperplate, Papyrus, fantasy;
     font-size: large;
 }
-.level button:hover{
+
+.level button:hover {
     background-color: #a35050;
     cursor: pointer;
 }
 
-.cell{
+.cell {
     background-color: salmon;
-        width: 40px;
-        height: 40px;
-        text-align: center;
-    
+    width: 40px;
+    height: 40px;
+    text-align: center;
+
 }
-.cell:hover{
+
+.cell:hover {
     background-color: #a35050;
     cursor: pointer;
 
 }
+
 .board-container {
     margin: auto;
-  }
-  .cell img {
+}
+
+.cell img {
     width: 40px;
     height: auto;
 }
 
-td{
+td {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-footer{
+
+footer {
     margin-top: 30px;
     font-family: Copperplate, Papyrus, fantasy;
 }
-.smiley{
+
+.smiley {
+    font-size: larger;
     background-color: #efc2c2;
     border: solid 2px rgb(176, 56, 56);
     border-radius: 10px;
     padding: 6px;
     width: 90px;
     height: 40px;
+    display: block;
+    margin: auto;
 }
-.smiley:hover{
+
+.smiley:hover {
     cursor: pointer;
     background-color: #a35050;
 }
-h3{
+
+h3 {
     font-family: Copperplate, Papyrus, fantasy;
+    display: inline;
+    margin-left: 20px;
+
 }
-/* .hints{
-    background-color: #efc2c2;
-    border: solid 2px rgb(176, 56, 56);
+.full-dark-mode {
+    background-color: rgb(176, 56, 56);
+    border: solid 2px #efc2c2;
     border-radius: 10px;
     padding: 10px;
-    width: 100px;
-    height: 30px;
-    font-family:Copperplate, Papyrus, fantasy ;
-    font-size: large;
-    margin: 20px auto;
-    
-} */
-  
+    margin-bottom: 10px;
+    font-family: Copperplate, Papyrus, fantasy;
+
+}
+
+.full-dark-mode:hover {
+    cursor: pointer;
+    background-color: #efc2c2;
+    border: solid 2px rgb(176, 56, 56);
+}
+
+.dark-mode {
+    background-color: #5c7c90;
+
+    .level {
+        font-family: Copperplate, Papyrus, fantasy;
+        color: rgb(221, 98, 98);
+    }
+
+    .level button {
+        background-color: rgb(176, 56, 56);
+        border: solid 2px #efc2c2;
+
+    }
+
+}
