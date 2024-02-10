@@ -84,6 +84,22 @@ h3 {
     margin-left: 20px;
 
 }
+.safe-click{
+    background-color: #efc2c2;
+    border: solid 2px rgb(176, 56, 56);
+    border-radius: 10px;
+    padding: 4px;
+    width: 60px;
+    height: 30px;
+    font-family: Copperplate, Papyrus, fantasy;
+    font-size:10px;
+    margin-top: 20px;
+}
+.safe-click:hover{
+    cursor: pointer;
+    background-color: #a35050;
+}
+
 .full-dark-mode {
     background-color: rgb(176, 56, 56);
     border: solid 2px #efc2c2;

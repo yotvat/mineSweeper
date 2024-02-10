@@ -1,12 +1,14 @@
 'use strict'
 const elBody = document.querySelector('body')
 var gIsHint
+var gSafeClicksCount = 0
+var elSafeClick = document.querySelector('.safe-click')
 
-function handleDarkMode(elBtn){
+function handleDarkMode(elBtn) {
     elBody.classList.toggle('dark-mode')
-    if(elBtn.innerHTML === 'LIGHT MODE') elBtn.innerHTML = 'DARK MODE'
-   else  elBtn.innerHTML = 'LIGHT MODE'
-    
+    if (elBtn.innerHTML === 'LIGHT MODE') elBtn.innerHTML = 'DARK MODE'
+    else elBtn.innerHTML = 'LIGHT MODE'
+
 }
 
 function expandShown(board, rowIdx, colIdx) {
@@ -30,3 +32,18 @@ function expandShown(board, rowIdx, colIdx) {
     }
 }
 
+function safeClick(elBtn) {
+    if (!gSafeClicksCount) {
+        var emptyPositions = getEmptyPos(gBoard)
+        var randCellIdx = getRandomInt(0, emptyPositions.length)
+        var safeClickCellIdx = emptyPositions[randCellIdx]
+        var currCell = gBoard[safeClickCellIdx.i][safeClickCellIdx.j]
+        var elCell = document.querySelector(`td.cell.cell-${safeClickCellIdx.i}-${safeClickCellIdx.j}`)
+        elCell.style.color = 'green'
+        elCell.innerHTML = currCell.minesAroundCount
+        gSafeClicksCount++
+    } else {
+        elBtn.innerHTML = '⛔️'
+        return
+    }
+}

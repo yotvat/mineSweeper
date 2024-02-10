@@ -29,15 +29,15 @@ function getRandomColor() {
     return color;
 }
 //only for pacman
-function getEmptyOptions(board) {
-    var options = []
+function getEmptyPos(board) {
+    var positions = []
     for (var i = 0; i < board.length; i++) {
-        for (var j = 0; j < board[i].length; j++) {
+        for (var j = 0; j < board[0].length; j++) {
             const currCell = board[i][j]
-            if (currCell === FOOD || currCell === EMPTY) options.push({ i, j })
+            if (!currCell.isShown&&!currCell.isMine) positions.push({ i, j })
         }
     }
-    return options
+    return positions
 }
 
 function createMat(ROWS, COLS) {
@@ -68,16 +68,16 @@ function playSound(sound) {
     sound.play()
 }
 //could be global with a change
-function getEmptyPos() {
-    const emptyPoses = []
-    for (var i = 0; i < gBoard.length; i++) {
-        for (var j = 0; j < gBoard[0].length; j++) {
-            const currCell = gBoard[i][j]
-            if (currCell === EMPTY) {
-                emptyPoses.push({ i, j })
-            }
-        }
-    }
-    const randIdx = getRandomIntInclusive(0, emptyPoses.length - 1)
-    return emptyPoses[randIdx]
-}
+// function getEmptyPos() {
+//     const emptyPoses = []
+//     for (var i = 0; i < gBoard.length; i++) {
+//         for (var j = 0; j < gBoard[0].length; j++) {
+//             const currCell = gBoard[i][j]
+//             if (currCell === EMPTY) {
+//                 emptyPoses.push({ i, j })
+//             }
+//         }
+//     }
+//     const randIdx = getRandomIntInclusive(0, emptyPoses.length - 1)
+//     return emptyPoses[randIdx]
+// }

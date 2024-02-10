@@ -139,6 +139,7 @@ function onCellClicked(elCell, i, j) {
         //MODEL   
         setMinesNegsCount(gBoard)
     }
+    if(elCell.style.color = 'green') elCell.style.color = 'black'
     //DOM
     elCell.innerHTML = currCell.minesAroundCount
 
@@ -186,19 +187,8 @@ function checkGameOver() {
     if (gMarkedMines === gLevel.MINES || gGame.shownCount === ((gLevel.SIZE * gLevel.SIZE) - gLevel.MINES)) {
         elLive.innerHTML = 'YOU WON!! AMAZING! press the smiley to restart'
         clearInterval(gTimerInterval)
-        //SAVE THE SCORE
-        // if (localStorage) {
-        //     localStorage.setItem('currentScore', score);
-        //     var currHighScore = localStorage.getItem('currentScore')
-        //     console.log(currHighScore);
-
-        //     // currScore.innerHTML = currHighScore.innerText
-        //     // console.log('setting score');
-
-        // }
-
         gGame.isOn = false
-        // setTimeout(restart, 3500)
+        setTimeout(restart, 2500)
         //lose
     } else if (gLives === 0) {
         console.log('gameover');
@@ -211,7 +201,7 @@ function checkGameOver() {
         }
         gGame.isOn = false
         clearInterval(gTimerInterval)
-        // setTimeout(restart, 2500)
+        setTimeout(restart, 2500)
     }
 
 }
@@ -242,8 +232,10 @@ function restart() {
     gLives = 3
     gMarkedMines = 0
     gGame.shownCount = 0
+    gSafeClicksCount = 0
     elLive.innerText = `lives : ${gLives}`
     elSmileyButton.innerHTML = SMILEY
+    elSafeClick.innerHTML = 'Safe click'
     onInit()
 }
 
