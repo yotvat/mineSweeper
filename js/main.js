@@ -231,6 +231,7 @@ function checkGameOver() {
 // }
 
 function restart() {
+    TIC_TOCK_SOUND.pause()
     clearInterval(gTimerInterval)
     document.querySelector('h3 span').innerText = 0
     gClickes = 0
