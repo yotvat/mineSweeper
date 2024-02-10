@@ -203,8 +203,8 @@ function checkGameOver() {
     } else if (gLives === 0) {
         console.log('gameover');
         elLive.innerText = 'game over!! you lost!  press the smiley to restart'
-        for (var i = 0; i < gBoard.length - 1; i++) {
-            for (var j = 0; j < gBoard[0].length - 1; j++) {
+        for (var i = 0; i < gBoard.length; i++) {
+            for (var j = 0; j < gBoard[0].length; j++) {
                 gBoard[i][j].isShown = true
                 renderCell(i, j)
             }
