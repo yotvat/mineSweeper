@@ -192,9 +192,15 @@ function checkGameOver() {
         elLive.innerHTML = 'YOU WON!! AMAZING! press the smiley to restart'
         clearInterval(gTimerInterval)
         gGame.isOn = false
+        for (var i = 0; i < gBoard.length; i++) {
+            for (var j = 0; j < gBoard[0].length; j++) {
+                gBoard[i][j].isShown = true
+                renderCell(i, j)
+            }
+        }
         TIC_TOCK_SOUND.pause()
         WIN_SOUND.play()
-    //lose
+        //lose
     } else if (gLives === 0) {
         console.log('gameover');
         elLive.innerText = 'game over!! you lost!  press the smiley to restart'
