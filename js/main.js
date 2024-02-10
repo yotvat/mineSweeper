@@ -188,7 +188,6 @@ function checkGameOver() {
         elLive.innerHTML = 'YOU WON!! AMAZING! press the smiley to restart'
         clearInterval(gTimerInterval)
         gGame.isOn = false
-        setTimeout(restart, 2500)
         //lose
     } else if (gLives === 0) {
         console.log('gameover');
@@ -201,7 +200,6 @@ function checkGameOver() {
         }
         gGame.isOn = false
         clearInterval(gTimerInterval)
-        setTimeout(restart, 2500)
     }
 
 }
