@@ -35,6 +35,7 @@ function onInit() {
     gBoard = buildBoard()
     rednerBoard(gBoard)
     gGame.isOn = true
+    elSafeClick.innerHTML = 'Safe click: 3'
 }
 
 function buildBoard() {
@@ -139,7 +140,7 @@ function onCellClicked(elCell, i, j) {
         //MODEL   
         setMinesNegsCount(gBoard)
     }
-    if(elCell.style.color = 'green') elCell.style.color = 'black'
+    if (elCell.style.color = 'green') elCell.style.color = 'black'
     //DOM
     elCell.innerHTML = currCell.minesAroundCount
 
@@ -149,7 +150,7 @@ function onCellClicked(elCell, i, j) {
         expandShown(gBoard, i, j)
     }
 
-    //ADD LIFE
+    //LIVES
     if (currCell.isMine) {
         elCell.innerHTML = MINE
         gLives--
@@ -165,13 +166,12 @@ function onCellClicked(elCell, i, j) {
 function onCellMarked(elCell, ev, i, j) {
     ev.preventDefault()
     var currCell = gBoard[i][j]
-    if(currCell.isShown) return
+    if (currCell.isShown) return
     if (currCell.isMarked) {
         currCell.isShown = false
         currCell.isMarked = false
         elCell.innerHTML = CELL
-    }else{
-
+    } else {
         //model
         currCell.isMarked = true
         if (currCell.isMine) gMarkedMines++
@@ -188,7 +188,7 @@ function checkGameOver() {
         elLive.innerHTML = 'YOU WON!! AMAZING! press the smiley to restart'
         clearInterval(gTimerInterval)
         gGame.isOn = false
-        //lose
+    //lose
     } else if (gLives === 0) {
         console.log('gameover');
         elLive.innerText = 'game over!! you lost!  press the smiley to restart'
@@ -201,7 +201,6 @@ function checkGameOver() {
         gGame.isOn = false
         clearInterval(gTimerInterval)
     }
-
 }
 
 //FULL EXPAND ON bonus.js
@@ -230,10 +229,10 @@ function restart() {
     gLives = 3
     gMarkedMines = 0
     gGame.shownCount = 0
-    gSafeClicksCount = 0
+    gSafeClicksCount = 3
     elLive.innerText = `lives : ${gLives}`
     elSmileyButton.innerHTML = SMILEY
-    elSafeClick.innerHTML = 'Safe click'
+    elSafeClick.innerHTML = 'Safe click: 3'
     onInit()
 }
 

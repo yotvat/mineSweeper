@@ -28,7 +28,7 @@ function getRandomColor() {
     }
     return color;
 }
-//only for pacman
+
 function getEmptyPos(board) {
     var positions = []
     for (var i = 0; i < board.length; i++) {
@@ -67,17 +67,3 @@ function playSound(sound) {
     new Audio(sound)
     sound.play()
 }
-//could be global with a change
-// function getEmptyPos() {
-//     const emptyPoses = []
-//     for (var i = 0; i < gBoard.length; i++) {
-//         for (var j = 0; j < gBoard[0].length; j++) {
-//             const currCell = gBoard[i][j]
-//             if (currCell === EMPTY) {
-//                 emptyPoses.push({ i, j })
-//             }
-//         }
-//     }
-//     const randIdx = getRandomIntInclusive(0, emptyPoses.length - 1)
-//     return emptyPoses[randIdx]
-// }
